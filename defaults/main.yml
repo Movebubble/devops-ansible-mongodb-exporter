@@ -7,5 +7,5 @@ mongodb_exporter_install_path: "/opt/mongodb_exporter/mongodb_exporter-{{ mongod
 mongodb_exporter_user: mongodb_exporter
 mongodb_exporter_group: mongodb_exporter
 
-mongodb_user: mongodb_exporter
-mongodb_password: s3cr3tpassw0rd
+mongodb_exporter_auth_user: mongodb_exporter
+mongodb_exporter_auth_password: s3cr3tpassw0rd
