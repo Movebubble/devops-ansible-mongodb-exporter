@@ -4,7 +4,7 @@ Wants=network-online.target
 After=network-online.target
 
 [Service]
-Environment="MONGODB_URI=mongodb://{{ mongodb_exporter_auth_user }}:{{ mongodb_exporter_auth_password }@localhost:27017"
+Environment="MONGODB_URI=mongodb://{{ mongodb_exporter_auth_user }}:{{ mongodb_exporter_auth_password }}@localhost:27017"
 User={{ mongodb_exporter_user }}
 Group={{ mongodb_exporter_group }}
 Type=simple
