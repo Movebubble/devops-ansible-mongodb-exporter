@@ -8,7 +8,7 @@ Environment="MONGODB_URI=mongodb://{{ mongodb_exporter_auth_user }}:{{ mongodb_e
 User={{ mongodb_exporter_user }}
 Group={{ mongodb_exporter_group }}
 Type=simple
-ExecStart={{ mongodb_exporter_install_path }}/mongodb_exporter
+ExecStart={{ mongodb_exporter_install_path }}
 
 [Install]
 WantedBy=multi-user.target
