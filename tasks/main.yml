@@ -1,0 +1,44 @@
+---
+
+- name: create mongodb_exporter group
+  group:
+    name: "{{ mongodb_exporter_group }}"
+    state: present
+
+- name: create mongodb_exporter user
+  user:
+    name: "{{ mongodb_exporter_user }}"
+    comment: "User to run mongodb_exporter"
+    createhome: no
+    shell: /bin/false
+    group: "{{ mongodb_exporter_group }}"
+    state: present
+
+- name: create mongodb_exporter home directory
+  file:
+    state: directory
+    path:  "{{ mongodb_exporter_parent_dir }}"
+    owner: "{{ mongodb_exporter_user }}"
+    group: "{{ mongodb_exporter_group }}"
+
+- name: download and untar mongodb_exporter tarball
+  unarchive:
+    src: "{{ mongodb_exporter_tarball_url }}"
+    dest: "{{ mongodb_exporter_parent_dir }}"
+    remote_src: yes
+    owner: "{{ mongodb_exporter_user }}"
+    group: "{{ mongodb_exporter_group }}"
+    creates: "{{ mongodb_exporter_install_path }}"
+
+- name: install service file
+  template:
+    src: mongodb_exporter.service.j2
+    dest: /etc/systemd/system/mongodb_exporter.service
+  notify:
+    - restart mongodb_exporter service
+
+- name: start mongodb_exporter service
+  systemd:
+    name: mongodb_exporter
+    state: started
+    enabled: yes

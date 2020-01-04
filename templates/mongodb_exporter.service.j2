@@ -1,0 +1,14 @@
+[Unit]
+Description=Node Exporter
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+Environment="MONGODB_URI=mongodb://{{ mongodb_user }}:{{ mongodb_password }@localhost:27017"
+User={{ mongodb_exporter_user }}
+Group={{ mongodb_exporter_group }}
+Type=simple
+ExecStart={{ mongodb_exporter_install_path }}/mongodb_exporter
+
+[Install]
+WantedBy=multi-user.target
